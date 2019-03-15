@@ -1,2 +1,2 @@
-# BreakSecretary
-Android secretary application where you can manage your breaktime.
+# 대한민국 인구의 25%가 치질 환자에 해당한다.
+
