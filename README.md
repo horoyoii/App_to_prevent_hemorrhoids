@@ -1,2 +1,12 @@
-# BreakSecretary
-Android secretary application where you can manage your breaktime.
+# 대한민국 인구의 25%가 치질 환자에 해당한다.
+
+### 1) BroadcastReceiver  
+ 안드로이드 시스템에 의하여 단말에서 일어나는 일들을 수신하는 역할을 수행한다.
+ 재부팅이라는 알람을 수신함으로써 휴대폰 재부팅 시 서비스를 자동으로 실행시켜준다.
+ 
+### 2) Shared Preference  
+ 세팅 정보(사용함 / 사용안함)를 Shared Preference 에 저장함으로써 재부팅 시 서비스를 시작할지 안할지를 결정한다.
+ 
+### 3) Service  
+ 비콘과의 거리를 감지한다. 
+ 
