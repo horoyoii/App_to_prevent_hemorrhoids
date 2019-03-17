@@ -24,8 +24,9 @@ import static com.example.preventthehemorrhoids.App.CHANNEL_ID;
 public class MyService extends Service implements BeaconConsumer {
     private BeaconManager beaconManager;
     private static final String TAG = "HEE";
+    private int threadhold;
     public MyService() {
-
+        threadhold = 0;
     }
 
     @Override
@@ -83,6 +84,10 @@ public class MyService extends Service implements BeaconConsumer {
                 // The callback for these APIs is didRangeBeaconsInRegion(Region region,
                 // Collection<Beacon>)which gives you a list of every beacon matched in the last scan interval.
                 // unbind 전까지 1초에 한번씩 호출된다.
+                threadhold++;
+                if(threadhold==5){
+                    StartDialogAct();
+                }
                 Log.d(TAG, "How many beacon in region ::" + String.valueOf(beacons.size()));
                 if (beacons.size() > 0) {
                     for (Beacon beacon : beacons) {
@@ -125,4 +130,10 @@ public class MyService extends Service implements BeaconConsumer {
             beaconManager.startRangingBeaconsInRegion(new Region("myRangingUniqueId", null, null, null));
         } catch (RemoteException e) {    }
     }
+
+    public void StartDialogAct(){
+        Intent dialogIntent = new Intent(this, DialogActivity.class);
+        startActivity(dialogIntent);
+    }
+
 }

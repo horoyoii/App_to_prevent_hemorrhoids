@@ -31,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BroadCastReceiver br = new BroadCastReceiver();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_BOOT_COMPLETED);
-        this.registerReceiver(br, filter);
+//        BroadCastReceiver br = new BroadCastReceiver();
+//        IntentFilter filter = new IntentFilter(Intent.ACTION_BOOT_COMPLETED);
+//        this.registerReceiver(br, filter);
+
         sp = getSharedPreferences("MySettings", Activity.MODE_PRIVATE);
         editor = sp.edit();
         SwitchButton switchButton = findViewById(R.id.switch_button);
