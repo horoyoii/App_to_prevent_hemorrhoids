@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
+    <!--
+    app:sb_button_color="#db99c7"
+    app:sb_shadow_color="#A36F95"
+    app:sb_background="#FFF"
+    app:sb_checkline_color="#a5dc88"
+    app:sb_checked_color="#A36F95"
+    app:sb_uncheckcircle_color="#A36F95"
+    -->
     <com.suke.widget.SwitchButton
         android:id="@+id/switch_button"
-
-        app:sb_button_color="#db99c7"
-        app:sb_shadow_color="#A36F95"
-        app:sb_background="#FFF"
-        app:sb_checkline_color="#a5dc88"
-        app:sb_checked_color="#A36F95"
-        app:sb_uncheckcircle_color="#A36F95"
-
         android:layout_width="213dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
