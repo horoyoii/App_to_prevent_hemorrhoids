@@ -2,6 +2,7 @@ package com.example.preventthehemorrhoids;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -54,6 +55,23 @@ public class MainActivity extends AppCompatActivity {
         switchButton.setEnabled(false);//disable button
         switchButton.setEnableEffect(false);//disable the switch animation
         */
+
+        // ===========================================================================
+        // Test
+
+
+
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // ===========================================================================
 
         switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override

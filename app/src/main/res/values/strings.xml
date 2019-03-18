@@ -1,3 +1,4 @@
+
 <resources>
     <string name="app_name">preventthehemorrhoids</string>
     <string name="title_activity_settings">Settings</string>
@@ -73,4 +74,10 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+
+    <!--Success Dialog-->
+    <string name="success_title">Oh Yeah!!</string>
+    <string name="success_message">Whatever you did, it was a huge success =D.</string>
+    <string name="success_button_text">OK, Cool</string>
+    <string name="content_description_base_dialog_icon">Imagem do Diálogo</string>
 </resources>

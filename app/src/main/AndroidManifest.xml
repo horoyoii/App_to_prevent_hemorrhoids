@@ -19,7 +19,8 @@
             android:label="@string/title_activity_settings"></activity>
 
         <activity
-            android:name=".DialogActivity"></activity>
+            android:name=".DialogActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
 
         <service
             android:name=".MyService"
