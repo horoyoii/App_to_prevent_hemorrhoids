@@ -21,12 +21,25 @@ import java.util.Collection;
 
 import static com.example.preventthehemorrhoids.App.CHANNEL_ID;
 
+// 알림 주기 2분 - 5분 -  10분
+// 칼만 필터 란??
+
 public class MyService extends Service implements BeaconConsumer {
     private BeaconManager beaconManager;
     private static final String TAG = "HEE";
-    private int threadhold;
+    private static final int VALID_RANGE = 5;
+    private enum STATE{
+        EMPTY, USING
+    }
+    STATE State;
+
+    private int threadhold, usingtime, major, minor;
     public MyService() {
         threadhold = 0;
+        usingtime = 0;
+        major = 1002;
+        minor = 20;
+        State = STATE.EMPTY;
     }
 
     @Override
@@ -95,7 +108,12 @@ public class MyService extends Service implements BeaconConsumer {
                                     "major:" + " " + beacon.getId2() + "\n" +
                                     "minor:" + " " + beacon.getId3() +"\n"+
                                     "Rssi:" + " "+beacon.getRssi());
+                        if(major == beacon.getId2().toInt() && minor == beacon.getId3().toInt()) {
+                            if(beacon.getDistance() < VALID_RANGE){
+                                usingtime++;
+                            }
 
+                        }
                     }
                 }
             }

@@ -11,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.suke.widget.SwitchButton;
@@ -26,18 +28,17 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private final String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
 
+    Button btn_setting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        BroadCastReceiver br = new BroadCastReceiver();
-//        IntentFilter filter = new IntentFilter(Intent.ACTION_BOOT_COMPLETED);
-//        this.registerReceiver(br, filter);
-
         sp = getSharedPreferences("MySettings", Activity.MODE_PRIVATE);
         editor = sp.edit();
         SwitchButton switchButton = findViewById(R.id.switch_button);
+        btn_setting = findViewById(R.id.btn_button);
 
         String setting = sp.getString(TURNONSETTING, "NULL");
         if(setting.equals(TURNON)) {
@@ -69,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StartSettingAct();
+
+            }
+        });
 
         checkPermissions();
     }
@@ -83,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MyService.class);
         this.stopService(intent);
     }
+
+
+    public void StartSettingAct(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
 
     private void checkPermissions() {
         boolean notgranted = true;
