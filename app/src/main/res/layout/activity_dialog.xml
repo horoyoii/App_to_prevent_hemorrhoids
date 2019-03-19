@@ -17,18 +17,19 @@
         android:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/dlg_one_button_tv_title"
+        android:id="@+id/dlg_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:ellipsize="end"
         android:fontFamily="@string/font_family_black"
         android:gravity="center"
         android:maxLines="1"
+        android:text="SUCCESS!"
         android:textAllCaps="true"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="SUCCESS!" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/dlg_one_button_tv_message"

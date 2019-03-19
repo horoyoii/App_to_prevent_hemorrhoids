@@ -32,14 +32,23 @@ import static com.example.preventthehemorrhoids.App.CHANNEL_ID;
 public class MyService extends Service implements BeaconConsumer {
     private BeaconManager beaconManager;
     private static final String TAG = "HEE";
-    private static final int VALID_RANGE = 5;
+    private static final int VALID_RANGE = 3;
+    public static final int FISRT_ALERT_TIME = 5;
+    public static final int SECOND_ALERT_TIME = 10;
+    public static final int THRID_ALERT_TIME = 15;
+    public static final String ALERT_TYPE = "ALERT_TYPE";
+
+
+    public enum ALERT{
+        FIRST_ALERT, SECOND_ALERT, THIRD_ALERT
+    }
     private enum STATE{
         EMPTY, USING
     }
     STATE State;
     AlertDialog alert;
 
-    private int threadhold, startTime, major, minor, readyTime, italTime, canIstart;
+    private int threadhold, startTime, major, minor, readyTime, italTime, canIstart, usingtime;
     private boolean isFounded;
     public MyService() {
         threadhold = 0;
@@ -50,6 +59,7 @@ public class MyService extends Service implements BeaconConsumer {
         State = STATE.EMPTY;
         readyTime = 0;
         canIstart = 0;
+        usingtime = 0;
         isFounded = false;
     }
 
@@ -109,17 +119,24 @@ public class MyService extends Service implements BeaconConsumer {
                 // The callback for these APIs is didRangeBeaconsInRegion(Region region,
                 // Collection<Beacon>)which gives you a list of every beacon matched in the last scan interval.
                 // unbind 전까지 1초에 한번씩 호출된다.
+                Log.d("HEES", String.valueOf(State));
+                Log.d("HEES", "canIstart : "+String.valueOf(canIstart));
+                Log.d("HEES", "italTime : "+String.valueOf(italTime));
+                Log.d("HEES", "usingtime : "+String.valueOf(usingtime));
+
                 isFounded = false;
                 threadhold++;
-                if(threadhold==5){
-                    Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
-                    startActivity(intent);
-                }
+//                if(threadhold==5){
+//                    Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+//                    startActivity(intent);
+//                }
 
                 // ===================================================================================
                 Log.d(TAG, "How many beacon in region ::" + String.valueOf(beacons.size()));
                 if (beacons.size() > 0) {
                     for (Beacon beacon : beacons) {
+                        if(major == beacon.getId2().toInt() && minor == beacon.getId3().toInt())
+                            Log.d("HEES", String.valueOf(beacon.getDistance()));
                         if(major == beacon.getId2().toInt() && minor == beacon.getId3().toInt() && beacon.getDistance() < VALID_RANGE) {
                             isFounded = true;
                         }
@@ -140,26 +157,41 @@ public class MyService extends Service implements BeaconConsumer {
                     }
                 }else{ // USING
                     // 꾸준히 초를 센다.
-                    int a = threadhold - startTime; // 실제 사용 시간
+                    usingtime = threadhold - startTime; // 실제 사용 시간
 
-                    //TODO: startTime 에 따른 dialog Show
+                    if(usingtime == FISRT_ALERT_TIME){
+                        Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                        intent.putExtra(ALERT_TYPE, ALERT.FIRST_ALERT);
+                        startActivity(intent);
+                    }else if(usingtime == SECOND_ALERT_TIME){
+                        Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                        intent.putExtra(ALERT_TYPE, ALERT.SECOND_ALERT);
+                        startActivity(intent);
+                    }else if(usingtime == THRID_ALERT_TIME){
+                        Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                        intent.putExtra(ALERT_TYPE, ALERT.THIRD_ALERT);
+                        startActivity(intent);
+                    }
+
 
                 }
 
 
+                if(State == STATE.USING) {
+                    // ===================================================================================
+                    // 비콘 신호를 5초 이상 잡지 못하면 이탈이라고 판단.
+                    if (!isFounded) { // 비콘 신호를 못찾았으면... 관련 변수 초기화
+                        italTime++;
+                    } else {
+                        italTime = 0;
+                    }
 
-                // ===================================================================================
-                // 비콘 신호를 5초 이상 잡지 못하면 이탈이라고 판단.
-                if(!isFounded){ // 비콘 신호를 못찾았으면... 관련 변수 초기화
-                    italTime++;
-                }else{
-                    italTime =0;
-                }
-
-                if(italTime >= 5){ // 이탈했다고 판단한다.
-                    State = STATE.EMPTY;
-                    italTime = 0;
-                    startTime = 0;
+                    if (italTime >= 5) { // 이탈했다고 판단한다.
+                        State = STATE.EMPTY;
+                        italTime = 0;
+                        startTime = 0;
+                        usingtime = 0;
+                    }
                 }
 
             }
