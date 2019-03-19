@@ -29,7 +29,7 @@ public class DialogActivity extends Activity {
         imageView = findViewById(R.id.dlg_image);
         button = findViewById(R.id.dlg_btn);
 
-        Intent intent = getIntent();
+        Intent intent = getIntent();//
         MyService.ALERT type = (MyService.ALERT)intent.getSerializableExtra(ALERT_TYPE);
 
         switch (type){
