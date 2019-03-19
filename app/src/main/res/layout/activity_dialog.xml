@@ -9,12 +9,12 @@
     tools:context=".DialogActivity">
 
     <ImageView
-        android:id="@+id/dlg_one_button_iv_icon"
+        android:id="@+id/dlg_image"
         android:layout_width="@dimen/dlg_one_button_icon_size"
         android:layout_height="@dimen/dlg_one_button_icon_size"
-        android:layout_marginBottom="@dimen/spacing_huge"
-        android:contentDescription="@string/content_description_base_dialog_icon"
-        android:src="@drawable/ic_launcher_background" />
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="@dimen/spacing_huge" />
 
     <TextView
         android:id="@+id/dlg_title"
@@ -32,16 +32,17 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/dlg_one_button_tv_message"
+        android:id="@+id/dlg_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginBottom="@dimen/spacing_huge"
         android:fontFamily="@string/font_family_regular"
         android:gravity="center"
+        android:text="Super success message"
         android:textAlignment="center"
         android:textColor="@color/grey_text"
-        android:textSize="16sp"
-        android:text="Super success message" />
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,7 +52,7 @@
         android:weightSum="1">
 
         <Button
-            android:id="@+id/dlg_one_button_btn_ok"
+            android:id="@+id/dlg_btn"
             style="@style/MediumButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

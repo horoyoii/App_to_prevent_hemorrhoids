@@ -161,14 +161,17 @@ public class MyService extends Service implements BeaconConsumer {
 
                     if(usingtime == FISRT_ALERT_TIME){
                         Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra(ALERT_TYPE, ALERT.FIRST_ALERT);
                         startActivity(intent);
                     }else if(usingtime == SECOND_ALERT_TIME){
                         Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra(ALERT_TYPE, ALERT.SECOND_ALERT);
                         startActivity(intent);
                     }else if(usingtime == THRID_ALERT_TIME){
                         Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra(ALERT_TYPE, ALERT.THIRD_ALERT);
                         startActivity(intent);
                     }

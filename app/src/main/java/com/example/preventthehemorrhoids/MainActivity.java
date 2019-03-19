@@ -62,15 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), DialogActivity.class);
-                startActivity(intent);
-            }
-        });
-
         // ===========================================================================
 
         switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
