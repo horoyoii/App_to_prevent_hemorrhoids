@@ -103,8 +103,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void StartSettingAct(){
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, SettingsActivity.class);
+//        startActivity(intent);
+        Intent i = new Intent(this, MyPreferenceActivity.class);
+        startActivity(i);
     }
 
 
