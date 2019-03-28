@@ -5,8 +5,10 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -54,8 +56,12 @@ public class MyService extends Service implements BeaconConsumer {
         threadhold = 0;
         startTime = 0;
         italTime = 0;
-        major = 1002;
-        minor = 20;
+
+//        SharedPreferences sp= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//       // sp = getSharedPreferences("preventthehemorrhoids_preferences", MODE_PRIVATE);
+//        major = Integer.valueOf(sp.getString("pref_major", "1002"));
+//        minor =Integer.valueOf(sp.getString("pref_minor", "20"));
+
         State = STATE.EMPTY;
         readyTime = 0;
         canIstart = 0;
@@ -76,6 +82,10 @@ public class MyService extends Service implements BeaconConsumer {
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
 
+        SharedPreferences sp= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // sp = getSharedPreferences("preventthehemorrhoids_preferences", MODE_PRIVATE);
+        major = Integer.valueOf(sp.getString("pref_major", "1002"));
+        minor =Integer.valueOf(sp.getString("pref_minor", "20"));
     }
 
 
